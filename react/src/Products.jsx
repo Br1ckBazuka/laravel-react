@@ -1,39 +1,38 @@
 import { useEffect, useState } from "react";
-import axiosClient from "../axios-client.js";
+import axiosClient from "./axios-client.js";
 import { Link } from "react-router-dom";
-import { useStateContext } from "../context/ContextProvider.jsx";
+import { useStateContext } from "./context/ContextProvider.jsx";
 
-export default function Users() {
-  const [users, setUsers] = useState([]);
+export default function Product() {
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const { setNotification } = useStateContext();
   let customId = 1;
   useEffect(() => {
-    getUsers();
+    getProducts();
   }, []);
 
-  const onDeleteClick = (user) => {
-    if (!window.confirm("Вы уверены, что хотите удалить этого пользователя?")) {
+  const onDeleteClick = (product) => {
+    if (!window.confirm("Вы уверены, что хотите удалить этот продукт?")) {
       return;
     }
-    axiosClient.delete(`/users/${user.id}`).then(() => {
-      setNotification("Пользователь успешно удален");
-      getUsers();
+    axiosClient.delete(`/products/${product.id}`).then(() => {
+      setNotification("Продукт успешно удален");
+      getProducts();
     });
   };
 
-  const getUsers = async () => {
+  const getProducts = async () => {
     try {
-      const { data } = await axiosClient.get("/users");
-      const dataSorted = data.data.reverse();
-      setUsers(dataSorted);
+      const { data } = await axiosClient.get("/products");
+      const dataSorted = data;
+      setProducts(dataSorted);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div>
       <div
@@ -43,8 +42,8 @@ export default function Users() {
           alignItems: "center",
         }}
       >
-        <h1>Users</h1>
-        <Link className="btn-add" to="/users/new">
+        <h1>Product</h1>
+        <Link className="btn-add" to="/product/new">
           Add new
         </Link>
       </div>
@@ -54,34 +53,32 @@ export default function Users() {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Create Date</th>
+              <th>Price</th>
               <th>Actions</th>
             </tr>
           </thead>
           {loading && (
             <tbody>
               <tr>
-                <td colSpan="5">Loading...</td>
+                <td colSpan="4">Loading...</td>
               </tr>
             </tbody>
           )}
           {!loading && (
             <tbody>
-              {users.map((u) => (
+              {products.map((p) => (
                 <tr key={customId}>
                   <td>{customId++}</td>
-                  <td>{u.name}</td>
-                  <td>{u.email}</td>
-                  <td>{u.created_at}</td>
+                  <td>{p.name}</td>
+                  <td>{p.price}</td>
                   <td>
-                    <Link className="btn-edit" to={"/users/" + u.id}>
+                    <Link className="btn-edit" to={"/products/" + p.id}>
                       Edit
                     </Link>
                     &nbsp;
                     <button
                       className="btn-delete"
-                      onClick={(ev) => onDeleteClick(u)}
+                      onClick={(ev) => onDeleteClick(p)}
                     >
                       Delete
                     </button>

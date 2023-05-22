@@ -76,4 +76,10 @@ class UserController extends Controller
 
         return response("", 204);
     }
+    
+    public function random()
+{
+    $users = User::inRandomOrder()->limit(10)->get();
+    return response()->json($users);
+}
 }

@@ -1,21 +1,39 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+@font-face {
+    font-family: "Virgil";
+    src: local("Virgil"), url(./fonts/Virgil.woff2) format("woff2");
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
 * {
     box-sizing: border-box;
 }
-html, body, #root, #defaultLayout, #guestLayout {
+html,
+body,
+#root,
+#defaultLayout,
+#guestLayout {
     min-height: 100vh;
 }
 
-h1, h2, h3, h4, h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     margin: 0;
+}
+.wrapper {
+    padding: 15px;
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: "Virgil", sans-serif;
     margin: 0;
     padding: 0;
-    font-size: 14px;
+    font-size: 16px;
     color: #212121;
     background-color: #f6f6f6;
 }
@@ -33,20 +51,19 @@ input {
 }
 
 input:focus {
-    border-color: #5b08a7;
+    border-color: #e67700;
 }
 
 .btn,
 .btn-add,
 .btn-edit,
 .btn-delete {
-    font-family: "Roboto", sans-serif;
     outline: 0;
-    background: #5b08a7;
+    background: #e67700;
     border: 0;
     text-decoration: none;
     padding: 15px;
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 16px;
     -webkit-transition: all 0.3 ease;
     transition: all 0.3 ease;
@@ -59,7 +76,7 @@ input:focus {
 
 .btn-add,
 .btn-edit,
-.btn-delete{
+.btn-delete {
     padding: 0.5rem 0.75rem;
     font-size: 14px;
     border-radius: 4px;
@@ -71,21 +88,20 @@ input:focus {
     background-color: #b72424;
 }
 
-.btn-logout {
+.btn-header {
     text-decoration: none;
     padding: 0.75rem 1.5rem;
-    color: #212121;
     transition: all 0.3s;
     border-radius: 6px;
 }
-.btn-logout:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+.btn-header:hover {
+    background-color: rgba(243, 130, 37, 0.288);
 }
 
 .btn:hover,
 .btn:active,
 .btn:focus {
-    background: #5b08a7;
+    background: #e67700;
 }
 
 .text-center {
@@ -111,7 +127,7 @@ table > tbody > tr > td {
 }
 
 .card {
-    background-color: #FFF;
+    background-color: #fff;
     border-radius: 0.5rem;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
     padding: 1.25rem 1.5rem;
@@ -151,7 +167,7 @@ table > tbody > tr > td {
     width: 360px;
     position: relative;
     z-index: 1;
-    background: #FFFFFF;
+    background: #ffffff;
     max-width: 360px;
     padding: 34px;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.1);
@@ -171,34 +187,37 @@ table > tbody > tr > td {
 }
 
 .login-signup-form .form .message a {
-    color: #5b08a7;
+    color: #e67700;
     text-decoration: none;
 }
 
 /* Login/Signup form */
-
 
 #defaultLayout {
     display: flex;
 }
 
 #defaultLayout aside {
-    width: 240px;
-    background-color: #5b08a7;
-    padding: 1rem
+    margin-top: 80px;
+    background: transparent;
+    border: 2px solid #e67700;
+    border-radius: 20px;
+    min-height: 100px;
+    height: 100%;
+    overflow: hidden;
 }
 
 #defaultLayout aside > a {
     display: block;
     padding: 0.75rem 1rem;
     border-radius: 6px;
-    color: white;
+    color: #364fc7;
     text-decoration: none;
     transition: all 0.2s;
 }
 
 #defaultLayout aside > a:hover {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(243, 130, 37, 0.288);
 }
 
 #defaultLayout .content {
@@ -213,10 +232,17 @@ table > tbody > tr > td {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    border-color: #e67700 !important;
+    border: 3px /* width */ solid; /* style */
 }
 
 #defaultLayout main {
     padding: 2rem;
+}
+#defaultLayout main a {
+    color: white;
 }
 
 .animated {
@@ -240,4 +266,39 @@ table > tbody > tr > td {
         opacity: 1;
         transform: translateY(0);
     }
+}
+#defaultLayout a {
+    color: #364fc7;
+    text-decoration: none;
+}
+
+/*home*/
+table.iksweb {
+    text-decoration: none;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+table.iksweb th {
+    font-weight: 500;
+    font-size: 20px;
+    color: #364fc7;
+    background-color: #ffffff;
+}
+table.iksweb td {
+    font-size: 16px;
+    color: #364fc7;
+    background-color: #ffffff;
+}
+table.iksweb td,
+table.iksweb th {
+    white-space: pre-wrap;
+    padding: 20px 0px;
+    line-height: 14px;
+    vertical-align: middle;
+    border: 3px solid #e67700;
+    text-align: center;
+}
+table.iksweb tr:hover {
+    background-color: #ffffff;
 }

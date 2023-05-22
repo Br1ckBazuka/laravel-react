@@ -1,4 +1,4 @@
-import {createBrowserRouter, Navigate} from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import Dashboard from "./Dashboard.jsx";
 import DefaultLayout from "./components/DefaultLayout";
 import GuestLayout from "./components/GuestLayout";
@@ -7,52 +7,82 @@ import NotFound from "./views/NotFound";
 import Signup from "./views/Signup";
 import Users from "./views/Users";
 import UserForm from "./views/UserForm";
+import Category from "./Category.jsx";
+import Products from "./Products.jsx";
+import Home from "./home.jsx";
+import Endpoints from "./Endpoints.jsx";
+import About from "./About.jsx";
+import Cabinet from "./Cabinet.jsx";
 
 const router = createBrowserRouter([
   {
-    path: '/',
-    element: <DefaultLayout/>,
+    path: "/",
+    element: <DefaultLayout />,
     children: [
       {
-        path: '/',
-        element: <Navigate to="/users"/>
+        path: "/",
+        element: <Navigate to="/home" />,
       },
       {
-        path: '/dashboard',
-        element: <Dashboard/>
+        path: "/Cabinet",
+        element: <Cabinet />,
       },
       {
-        path: '/users',
-        element: <Users/>
+        path: "/home",
+        element: <Home />,
       },
       {
-        path: '/users/new',
-        element: <UserForm key="userCreate" />
+        path: "/endpoints",
+        element: <Endpoints />,
       },
       {
-        path: '/users/:id',
-        element: <UserForm key="userUpdate" />
-      }
-    ]
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/Category",
+        element: <Category />,
+      },
+      {
+        path: "/Products",
+        element: <Products />,
+      },
+      {
+        path: "/users",
+        element: <Users />,
+      },
+      {
+        path: "/users/new",
+        element: <UserForm key="userCreate" />,
+      },
+      {
+        path: "/users/:id",
+        element: <UserForm key="userUpdate" />,
+      },
+    ],
   },
   {
-    path: '/',
-    element: <GuestLayout/>,
+    path: "/",
+    element: <GuestLayout />,
     children: [
       {
-        path: '/login',
-        element: <Login/>
+        path: "/login",
+        element: <Login />,
       },
       {
-        path: '/signup',
-        element: <Signup/>
-      }
-    ]
+        path: "/signup",
+        element: <Signup />,
+      },
+    ],
   },
   {
     path: "*",
-    element: <NotFound/>
-  }
-])
+    element: <NotFound />,
+  },
+]);
 
 export default router;
