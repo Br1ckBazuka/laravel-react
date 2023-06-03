@@ -1,39 +1,38 @@
 import { useEffect, useState } from "react";
-import axiosClient from "../axios-client.js";
+import axiosClient from "./axios-client.js";
 import { Link } from "react-router-dom";
-import { useStateContext } from "../context/ContextProvider.jsx";
+import { useStateContext } from "./context/ContextProvider.jsx";
 
-export default function Users() {
-  const [users, setUsers] = useState([]);
+export default function Categories() {
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const { setNotification } = useStateContext();
   let customId = 1;
   useEffect(() => {
-    getUsers();
+    getCategories();
   }, []);
 
-  const onDeleteClick = (user) => {
-    if (!window.confirm("Вы уверены, что хотите удалить этого пользователя?")) {
+  const onDeleteClick = (category) => {
+    if (!window.confirm("Вы уверены, что хотите удалить эту категорию?")) {
       return;
     }
-    axiosClient.delete(`/users/${user.id}`).then(() => {
-      setNotification("Пользователь успешно удален");
-      getUsers();
+    axiosClient.delete(`/categories/${category.id}`).then(() => {
+      setNotification("Категория успешно удалена");
+      getCategories();
     });
   };
 
-  const getUsers = async () => {
+  const getCategories = async () => {
     try {
-      const { data } = await axiosClient.get("/users");
-      const dataSorted = data.data.reverse();
-      setUsers(dataSorted);
+      const { data } = await axiosClient.get("/categories");
+      const dataSorted = data;
+      setCategories(dataSorted);
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div>
       <div
@@ -43,8 +42,8 @@ export default function Users() {
           alignItems: "center",
         }}
       >
-        <h1>Users</h1>
-        <Link className="btn-add" to="/users/new">
+        <h1>Category</h1>
+        <Link className="btn-add" to="/category/new">
           Add new
         </Link>
       </div>
@@ -54,34 +53,30 @@ export default function Users() {
             <tr>
               <th>ID</th>
               <th>Name</th>
-              <th>Email</th>
-              <th>Create Date</th>
               <th>Actions</th>
             </tr>
           </thead>
           {loading && (
             <tbody>
               <tr>
-                <td colSpan="5">Loading...</td>
+                <td colSpan="3">Loading...</td>
               </tr>
             </tbody>
           )}
           {!loading && (
             <tbody>
-              {users.map((u) => (
+              {categories.map((c) => (
                 <tr key={customId}>
                   <td>{customId++}</td>
-                  <td>{u.name}</td>
-                  <td>{u.email}</td>
-                  <td>{u.created_at}</td>
+                  <td>{c.name}</td>
                   <td>
-                    <Link className="btn-edit" to={"/users/" + u.id}>
+                    <Link className="btn-edit" to={"/categories/" + c.id}>
                       Edit
                     </Link>
                     &nbsp;
                     <button
                       className="btn-delete"
-                      onClick={(ev) => onDeleteClick(u)}
+                      onClick={(ev) => onDeleteClick(c)}
                     >
                       Delete
                     </button>
